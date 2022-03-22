@@ -1,42 +1,57 @@
 import './App.css';
 import React from 'react';
 import Overview from './components/Overview';
+import uniqid from "uniqid";
 
 class App extends React.Component {  
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
+  
     this.state = {
       tasks: [],
-      inputValue: ''
+      task: {
+        text: '',
+        id: uniqid(),
+      },
     };
-    this.updateInputValue = this.updateInputValue.bind(this);
-    this.newTask = this.newTask.bind(this);
+  
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.onSubmitTask = this.onSubmitTask.bind(this);
   }
 
-  updateInputValue(e) {
+  handleInputChange(e) {
     this.setState({
-      inputValue: e.target.value
+      task: {
+        text: e.target.value,
+        id: this.state.task.id,
+      }
     });
   }
 
-  newTask(e) {
-    if (this.state.inputValue !== '') {
+  onSubmitTask(e) {
+    e.preventDefault();
+    if (this.state.task !== '') {
       this.setState({
-        tasks: [...this.state.tasks, this.state.inputValue],
-        inputValue: ''
+        tasks: this.state.tasks.concat(this.state.task),
+        task: {
+          text: '',
+          id: uniqid(),
+        },
       });
     }
-    e.preventDefault();
+    
   };
 
   render() {
+    const { tasks, task } = this.state;
+  
     return (
-      <div className="app-container">
-        <form onSubmit={this.newTask}>
-          <input type="text" value={this.state.inputValue} onChange={this.updateInputValue}></input>
-          <button type="submit">Add task</button>
+      <div className='app-container'>
+        <form onSubmit={this.onSubmitTask}>
+          <input type='text' value={task.text} onChange={this.handleInputChange}></input>
+          <button type='submit'>Add task</button>
         </form>
-        <Overview tasks={this.state.tasks}/>
+        <Overview tasks={tasks}/>
       </div>
     )
   };
