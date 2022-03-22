@@ -20,17 +20,18 @@ class App extends React.Component {
   }
 
   newTask(e) {
-    this.setState({
-      tasks: [...this.state.tasks, this.state.inputValue],
-      inputValue: ''
-    });
-    e.preventDefault();
+    if (this.state.inputValue !== '') {
+      this.setState({
+        tasks: [...this.state.tasks, this.state.inputValue],
+        inputValue: ''
+      });
+    }
     e.preventDefault();
   };
 
   render() {
     return (
-      <div>
+      <div className="app-container">
         <form onSubmit={this.newTask}>
           <input type="text" value={this.state.inputValue} onChange={this.updateInputValue}></input>
           <button type="submit">Add task</button>

@@ -5,7 +5,8 @@ export default class Overview extends React.Component {
     const { tasks } = this.props;
   
     return (
-      <div>
+      <div className="tasks">
+        <h1>My Task List</h1>
         <ul>
           {tasks.map((task, i) => 
             <li key={i}>{task}</li>
