@@ -18,6 +18,7 @@ class App extends React.Component {
   
     this.handleInputChange = this.handleInputChange.bind(this);
     this.onSubmitTask = this.onSubmitTask.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
   }
 
   handleInputChange(e) {
@@ -32,7 +33,7 @@ class App extends React.Component {
 
   onSubmitTask(e) {
     e.preventDefault();
-    if (this.state.task !== '') {
+    if (this.state.task.text !== '') {
       this.setState({
         tasks: this.state.tasks.concat(this.state.task),
         task: {
@@ -42,8 +43,14 @@ class App extends React.Component {
         },
       });
     }
-    
   };
+
+  deleteTask(taskId, taskCount) {
+    this.setState({
+      tasks: this.state.tasks.filter((t) => t.id !== taskId)
+                             .map((t) => { if (t.count > taskCount) { t.count -= 1 } return t; }),
+    });
+  }
 
   render() {
     const { tasks, task } = this.state;
@@ -51,10 +58,10 @@ class App extends React.Component {
     return (
       <div className='app-container'>
         <form onSubmit={this.onSubmitTask}>
-          <input type='text' value={task.text} onChange={this.handleInputChange}></input>
-          <button type='submit'>Add task</button>
+          <input type='text' placeholder='Build new Death Star' value={task.text} onChange={this.handleInputChange}></input>
+          <button type='submit' className='btn btn-primary'>Add task</button>
         </form>
-        <Overview tasks={tasks}/>
+        <Overview tasks={tasks} deleteTask={this.deleteTask}/>
       </div>
     )
   };
