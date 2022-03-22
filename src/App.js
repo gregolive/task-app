@@ -11,6 +11,7 @@ class App extends React.Component {
       tasks: [],
       task: {
         text: '',
+        count: 1,
         id: uniqid(),
       },
     };
@@ -23,6 +24,7 @@ class App extends React.Component {
     this.setState({
       task: {
         text: e.target.value,
+        count: this.state.task.count,
         id: this.state.task.id,
       }
     });
@@ -35,6 +37,7 @@ class App extends React.Component {
         tasks: this.state.tasks.concat(this.state.task),
         task: {
           text: '',
+          count: this.state.task.count + 1,
           id: uniqid(),
         },
       });

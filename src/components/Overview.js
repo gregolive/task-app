@@ -9,7 +9,10 @@ export default class Overview extends React.Component {
         <h1>My Task List</h1>
         <ul>
           {tasks.map((task) => 
-            <li key={task.id}>{task.text}</li>
+            <li key={task.id}>
+              <span className='task-count'>{task.count}›  </span>
+              {task.text}
+            </li>
           )}
         </ul>
       </div>
