@@ -23,11 +23,15 @@ form {
 }
 
 input {
-  font-size: 1.1rem;
-  border: none;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.2rem;
   border-radius: 0.25rem;
-  margin-right: 0.5rem;
   padding: 0.4rem 0.5rem;
+}
+
+.new-task {
+  border: none;
+  margin-right: 0.5rem;
 }
 
 .btn {
@@ -35,13 +39,13 @@ input {
   border-radius: 0.25rem;
   font-size: 1rem;
   font-weight: 600;
-  padding: 0.5rem 0.75rem;
   cursor: pointer;
 }
 
 .btn-primary {
   color: white;
   background-color: slategray;
+  padding: 0.5rem 0.75rem;
 }
 
 .tasks {
@@ -61,6 +65,7 @@ li {
   font-size: 1.2rem;
   margin-bottom: 0.4rem;
   padding-bottom: 0.4rem;
+  height: 42px;
   list-style: none;
   display: flex;
   justify-content: space-between;
@@ -78,7 +83,30 @@ li:not(:last-of-type) {
   margin-right: 0.5rem;
 }
 
+.task-text {
+  padding: 0.4rem 0.5rem;
+  border: 1px solid transparent;
+}
+
+.edit-task {
+  border: 1px solid lightgray;
+}
+
+.btn-confirm {
+  color: limegreen;
+  background-color: transparent;
+}
+
 .btn-delete {
   color: crimson;
+  background-color: transparent;
+}
+
+.btn-delete:disabled {
+  opacity: 0.25;
+}
+
+.btn-edit {
+  color: dodgerblue;
   background-color: transparent;
 }
